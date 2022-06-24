@@ -7,9 +7,17 @@
 
 import Foundation
 
-class LoginParameters: Encodable {
-    let username: String
-    let password: String
+class LoginParameters: ObservableObject, Codable {
+    
+    static let sharedLoginParam = LoginParameters()
+    
+    @Published var username: String
+    @Published var password: String
+    
+    init() {
+        
+    }
+    
     init(username: String, password: String) {
         self.username = username
         self.password = password

@@ -14,8 +14,10 @@ struct Login: View {
     @State private var responseBody = ""
     @State private var showAlert = false
     @State private var toIndexPage = false
-    @State private var showServerAlert = false
-    
+    enum ActiveAlert {
+        case server, fail
+    }
+    @State private var activeAlert: ActiveAlert = .fail
     var loginParameters: LoginParameters {
         get {
             return LoginParameters(username: username, password: password)
@@ -80,22 +82,24 @@ struct Login: View {
                         })
                         .buttonStyle(.borderedProminent)
                         .shadow(radius: 5)
-                        .alert(isPresented: $showServerAlert) {
-                            Alert(
-                                title:
-                                    Text("Oops!服务器出现了问题")
-                                .foregroundColor(.red),
-                                  message:
-                                    Text("服务器出现错误")
-                            )
-                        }
                         .alert(isPresented: $showAlert) {
-                            Alert(
-                                title:
-                                    Text("登录失败!")
-                                        .foregroundColor(.red),
-                                  message: Text("您输入的用户名或密码不正确")
-                            )
+                            switch activeAlert {
+                            case .server:
+                                return Alert(
+                                    title:
+                                        Text("Oops!服务器出现了问题")
+                                    .foregroundColor(.red),
+                                      message:
+                                        Text("服务器出现错误")
+                                )
+                            case .fail:
+                                return Alert(
+                                    title:
+                                        Text("登录失败!")
+                                            .foregroundColor(.red),
+                                      message: Text("您输入的用户名或密码不正确")
+                                )
+                            }
                         }
                     }
                                           
@@ -118,12 +122,12 @@ struct Login: View {
                 return
             }
             if responseBody == "500" {
-                showServerAlert = true
+                activeAlert = .server
             }
             if responseBody == "OK" {
                 toIndexPage = true
             } else if responseBody == "FAIL" {
-                showAlert = true
+                activeAlert = .fail
             }
         }
         
