@@ -11,6 +11,12 @@
 		0A4C949928646CD3002119C6 /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C949828646CD3002119C6 /* Index.swift */; };
 		0A4C949B2864878F002119C6 /* RegisterParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C949A2864878F002119C6 /* RegisterParameters.swift */; };
 		0A4C949D28648B4D002119C6 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C949C28648B4D002119C6 /* Register.swift */; };
+		0A7A15BF28659FD800BB8A06 /* UserInfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A15BE28659FD800BB8A06 /* UserInfoSheet.swift */; };
+		0A7A15C22865A22600BB8A06 /* MyRentalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A15C12865A22600BB8A06 /* MyRentalInfo.swift */; };
+		0A7A15C42865A2C300BB8A06 /* UpdateUserPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A15C32865A2C300BB8A06 /* UpdateUserPassword.swift */; };
+		0A7A15C62865AA9D00BB8A06 /* PublishUserHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A15C52865AA9D00BB8A06 /* PublishUserHouse.swift */; };
+		0A7A15C82865AAC200BB8A06 /* MyPublished.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A15C72865AAC200BB8A06 /* MyPublished.swift */; };
+		0A7A15CA2865B39400BB8A06 /* House.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A15C92865B39400BB8A06 /* House.swift */; };
 		0AB4CEEF28639FF9000500BB /* HouseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4CEEE28639FF9000500BB /* HouseApp.swift */; };
 		0AB4CEF128639FF9000500BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4CEF028639FF9000500BB /* ContentView.swift */; };
 		0AB4CEF328639FF9000500BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AB4CEF228639FF9000500BB /* Assets.xcassets */; };
@@ -24,6 +30,12 @@
 		0A4C949828646CD3002119C6 /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
 		0A4C949A2864878F002119C6 /* RegisterParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterParameters.swift; sourceTree = "<group>"; };
 		0A4C949C28648B4D002119C6 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
+		0A7A15BE28659FD800BB8A06 /* UserInfoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSheet.swift; sourceTree = "<group>"; };
+		0A7A15C12865A22600BB8A06 /* MyRentalInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRentalInfo.swift; sourceTree = "<group>"; };
+		0A7A15C32865A2C300BB8A06 /* UpdateUserPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserPassword.swift; sourceTree = "<group>"; };
+		0A7A15C52865AA9D00BB8A06 /* PublishUserHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishUserHouse.swift; sourceTree = "<group>"; };
+		0A7A15C72865AAC200BB8A06 /* MyPublished.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPublished.swift; sourceTree = "<group>"; };
+		0A7A15C92865B39400BB8A06 /* House.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = House.swift; sourceTree = "<group>"; };
 		0AB4CEEB28639FF9000500BB /* House.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = House.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AB4CEEE28639FF9000500BB /* HouseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseApp.swift; sourceTree = "<group>"; };
 		0AB4CEF028639FF9000500BB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,8 +64,21 @@
 			children = (
 				0A4C9495286455DC002119C6 /* LoginParameters.swift */,
 				0A4C949A2864878F002119C6 /* RegisterParameters.swift */,
+				0A7A15C92865B39400BB8A06 /* House.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		0A7A15C02865A21000BB8A06 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				0A7A15C12865A22600BB8A06 /* MyRentalInfo.swift */,
+				0A7A15BE28659FD800BB8A06 /* UserInfoSheet.swift */,
+				0A7A15C32865A2C300BB8A06 /* UpdateUserPassword.swift */,
+				0A7A15C52865AA9D00BB8A06 /* PublishUserHouse.swift */,
+				0A7A15C72865AAC200BB8A06 /* MyPublished.swift */,
+			);
+			path = UserInfo;
 			sourceTree = "<group>";
 		};
 		0AB4CEE228639FF9000500BB = {
@@ -77,6 +102,7 @@
 		0AB4CEED28639FF9000500BB /* House */ = {
 			isa = PBXGroup;
 			children = (
+				0A7A15C02865A21000BB8A06 /* UserInfo */,
 				0A4C9497286456CF002119C6 /* Model */,
 				0AB4CEEE28639FF9000500BB /* HouseApp.swift */,
 				0AB4CEF028639FF9000500BB /* ContentView.swift */,
@@ -210,9 +236,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A7A15C42865A2C300BB8A06 /* UpdateUserPassword.swift in Sources */,
 				0A4C949B2864878F002119C6 /* RegisterParameters.swift in Sources */,
+				0A7A15CA2865B39400BB8A06 /* House.swift in Sources */,
 				0AB4CEFD2863A009000500BB /* Login.swift in Sources */,
+				0A7A15BF28659FD800BB8A06 /* UserInfoSheet.swift in Sources */,
 				0A4C9496286455DC002119C6 /* LoginParameters.swift in Sources */,
+				0A7A15C62865AA9D00BB8A06 /* PublishUserHouse.swift in Sources */,
+				0A7A15C82865AAC200BB8A06 /* MyPublished.swift in Sources */,
+				0A7A15C22865A22600BB8A06 /* MyRentalInfo.swift in Sources */,
 				0AB4CEF128639FF9000500BB /* ContentView.swift in Sources */,
 				0A4C949D28648B4D002119C6 /* Register.swift in Sources */,
 				0AB4CEEF28639FF9000500BB /* HouseApp.swift in Sources */,

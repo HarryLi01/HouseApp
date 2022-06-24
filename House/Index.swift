@@ -8,9 +8,28 @@
 import SwiftUI
 
 struct Index: View {
-    
+    @State private var showInfo = false
     var body: some View {
+        NavigationView {
+            
+        }
+        .navigationTitle(Text("房屋租赁网"))
+        .toolbar {
+            ToolbarItem(id: "userInfo") {
+                Button(action: showUserInfo) {
+                    Image(systemName: "person")
+                }
+                .sheet(isPresented: $showInfo) {
+                    UserInfoSheet()
+                }
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
         Text("Index Page")
+    }
+    
+    func showUserInfo() {
+        showInfo = true
     }
 }
 
