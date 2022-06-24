@@ -14,6 +14,7 @@ struct Login: View {
     @State private var responseBody = ""
     @State private var showAlert = false
     @State private var toIndexPage = false
+    @State private var showServerAlert = false
     
     var loginParameters: LoginParameters {
         get {
@@ -79,6 +80,15 @@ struct Login: View {
                         })
                         .buttonStyle(.borderedProminent)
                         .shadow(radius: 5)
+                        .alert(isPresented: $showServerAlert) {
+                            Alert(
+                                title:
+                                    Text("Oops!服务器出现了问题")
+                                .foregroundColor(.red),
+                                  message:
+                                    Text("服务器出现错误")
+                            )
+                        }
                         .alert(isPresented: $showAlert) {
                             Alert(
                                 title:
@@ -87,10 +97,8 @@ struct Login: View {
                                   message: Text("您输入的用户名或密码不正确")
                             )
                         }
-
                     }
                                           
-                    
                     HStack {
                         Text("新用户？")
                         NavigationLink(destination: Register()) {
@@ -106,10 +114,11 @@ struct Login: View {
     func login() {
         let request = AF.request("http://localhost:8090/login", method: .post, parameters: loginParameters)
         request.responseData { response in
-            guard let responseBody = String(bytes: response.data!, encoding: .utf8) else {
-                showAlert = true
-                print("error getting response data!")
+            guard let responseBody = String(bytes: response.data ?? "500".data(using: .utf8)!, encoding: .utf8) else {
                 return
+            }
+            if responseBody == "500" {
+                showServerAlert = true
             }
             if responseBody == "OK" {
                 toIndexPage = true
