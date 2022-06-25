@@ -8,16 +8,15 @@
 import SwiftUI
 import Alamofire
 
-
 struct UpdateUserPassword: View {
-    @ObservedObject var loginParameters: LoginParameters = .sharedLoginParam
+    let loginParameters: LoginParameters = .sharedLoginParam
     @State private var initialPassword = ""
-    @State private var newPassword = ""
-    @State private var confirmPassword = ""
+    @State private var newPassword: String = ""
+    @State private var confirmPassword: String = ""
     @State private var showAlert = false
-    @State private var id = 0
+    @State var user: LoginUser = LoginUser()
     enum ActiveAlert {
-        case success, fail
+        case success, fail, different
     }
     @State private var activeAlert: ActiveAlert = .fail
     var body: some View {
@@ -31,7 +30,7 @@ struct UpdateUserPassword: View {
                             Spacer()
                             Text("原密码")
                                 .frame(width: 90, alignment: .leading)
-                            SecureField("原密码", text: $initialPassword)
+                            TextField("原密码", text: $initialPassword)
                             Spacer()
                         }
                         Divider()
@@ -39,7 +38,7 @@ struct UpdateUserPassword: View {
                             Spacer()
                             Text("新密码")
                                 .frame(width: 90, alignment: .leading)
-                            SecureField("新密码", text: $newPassword)
+                            TextField("新密码", text: $newPassword)
                             Spacer()
                         }
                         Divider()
@@ -47,7 +46,7 @@ struct UpdateUserPassword: View {
                             Spacer()
                             Text("确认新密码")
                                 .frame(width: 90, alignment: .leading)
-                            SecureField("确认新密码", text: $confirmPassword)
+                            TextField("确认新密码", text: $confirmPassword)
                             Spacer()
                         }
                         Divider()
@@ -58,10 +57,7 @@ struct UpdateUserPassword: View {
                     HStack {
                         Spacer(minLength: 70)
                         //submit button
-                        Button(action: {
-                            submit()
-                            showAlert = true
-                        }) {
+                        Button(action: submit) {
                             Text("提交")
                                 .frame(width: 80)
                         }
@@ -85,6 +81,11 @@ struct UpdateUserPassword: View {
                                     title: Text("修改失败"),
                                     message: Text("您输入的原密码不正确")
                                 )
+                            case .different:
+                                 return Alert(
+                                    title: Text("密码不一致!"),
+                                    message: Text("两次输入的密码不一致")
+                                 )
                             }
                         }
                         Spacer()
@@ -107,13 +108,31 @@ struct UpdateUserPassword: View {
         
     }
     
-    func submit() {
-        let reqeuest = AF.request("http://localhost:8090/getLoginUser", method: .post, parameters: loginParameters)
-        reqeuest.responseData { response in
-            print(String(bytes: response.data!, encoding: .utf8))
-        }
+    //decode user json from server
+    func decodeUserJson(userJson: String) -> LoginUser {
         let decoder = JSONDecoder()
-        let parameters = ["id": 1, "newPwd": newPassword, "oldPwd": initialPassword] as [String: Any]
+        guard let user = try? decoder.decode(LoginUser.self, from: userJson.data(using: .utf8)!) else {
+            fatalError("There is an error decoding login user json")
+        }
+        return user
+    }
+    
+    func submit() {
+        if newPassword != confirmPassword {
+            activeAlert = .different
+            showAlert = true
+            return
+        }
+        //get current login user
+        let networkParameters = NetworkParameters(username: loginParameters.username ?? "", password: loginParameters.password ?? "")
+        let reqeuest = AF.request("http://localhost:8090/getLoginUser", method: .post, parameters: networkParameters)
+        reqeuest.responseData { response in
+            let userJson = String(bytes: response.data!, encoding: .utf8)
+            user = decodeUserJson(userJson: userJson ?? "")
+        }
+        
+        //update password
+        let parameters = ["id": user.uID ?? 0, "newPwd": newPassword, "oldPwd": initialPassword] as [String: Any]
         let request = AF.request("http://localhost:8090/updateUserPwd", method: .post, parameters: parameters)
         request.responseData { response in
             guard let responseMessage = String(bytes:  response.data!, encoding: .utf8) else {
@@ -122,9 +141,11 @@ struct UpdateUserPassword: View {
             if responseMessage == "OK" {
                 activeAlert = .success
                 reset()
+                showAlert = true
             }
             else {
                 activeAlert = .fail
+                showAlert = true
             }
         }
     }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct LoginUser: Codable {
-    var uID: Int = 0
+    var uID: Int?
     var uName: String?
     var uPassword: String?
     var uPhoneNumber: String?

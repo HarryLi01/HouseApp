@@ -18,12 +18,7 @@ struct Login: View {
         case server, fail
     }
     @State private var activeAlert: ActiveAlert = .fail
-    var loginParameters: LoginParameters {
-        get {
-            return LoginParameters(username: username, password: password)
-        }
-    }
-
+    var loginParameters: LoginParameters = .sharedLoginParam
     
     var body: some View {
         NavigationView {
@@ -50,7 +45,6 @@ struct Login: View {
                             .padding(.bottom, 20)
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
-                            
                         Spacer()
                         Spacer()
                     }
@@ -58,7 +52,7 @@ struct Login: View {
                     HStack {
                         Spacer()
                         Spacer()
-                        SecureField("密码", text: $password)
+                        TextField("密码", text: $password)
                             .padding()
                             .background(Color(red: 0.2, green: 0.3, blue: 0.4, opacity: 0.1))
                             .cornerRadius(10)
@@ -116,7 +110,7 @@ struct Login: View {
     }
     
     func login() {
-        let networkParameters = NetworkParameters(username: loginParameters.username ?? "", password: loginParameters.password ?? "")
+        let networkParameters = NetworkParameters(username: username, password: password)
         let request = AF.request("http://localhost:8090/login", method: .post, parameters: networkParameters)
         request.responseData { response in
             guard let responseBody = String(bytes: response.data ?? "500".data(using: .utf8)!, encoding: .utf8) else {
@@ -127,6 +121,8 @@ struct Login: View {
                 showAlert = true
             }
             if responseBody == "OK" {
+                loginParameters.username = username
+                loginParameters.password = password
                 toIndexPage = true
             } else if responseBody == "FAIL" {
                 activeAlert = .fail
