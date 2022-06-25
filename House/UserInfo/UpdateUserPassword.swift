@@ -10,7 +10,7 @@ import Alamofire
 
 struct UpdateUserPassword: View {
     let loginParameters: LoginParameters = .sharedLoginParam
-    @State private var initialPassword = ""
+    @State private var oldPassword = ""
     @State private var newPassword: String = ""
     @State private var confirmPassword: String = ""
     @State private var showAlert = false
@@ -30,7 +30,7 @@ struct UpdateUserPassword: View {
                             Spacer()
                             Text("原密码")
                                 .frame(width: 90, alignment: .leading)
-                            TextField("原密码", text: $initialPassword)
+                            TextField("原密码", text: $oldPassword)
                             Spacer()
                         }
                         Divider()
@@ -57,7 +57,14 @@ struct UpdateUserPassword: View {
                     HStack {
                         Spacer(minLength: 70)
                         //submit button
-                        Button(action: submit) {
+                        Button(action: {
+                            if newPassword != confirmPassword {
+                                activeAlert = .different
+                                showAlert = true
+                                return
+                            }
+                            submit()
+                        }) {
                             Text("提交")
                                 .frame(width: 80)
                         }
@@ -118,28 +125,24 @@ struct UpdateUserPassword: View {
     }
     
     func submit() {
-        if newPassword != confirmPassword {
-            activeAlert = .different
-            showAlert = true
-            return
-        }
         //get current login user
         let networkParameters = NetworkParameters(username: loginParameters.username ?? "", password: loginParameters.password ?? "")
-        let reqeuest = AF.request("http://localhost:8090/getLoginUser", method: .post, parameters: networkParameters)
-        reqeuest.responseData { response in
+        let request1 = AF.request("http://localhost:8090/getLoginUser", method: .post, parameters: networkParameters)
+        request1.responseData { response in
             let userJson = String(bytes: response.data!, encoding: .utf8)
             user = decodeUserJson(userJson: userJson ?? "")
         }
         
         //update password
-        let parameters = ["id": user.uID ?? 0, "newPwd": newPassword, "oldPwd": initialPassword] as [String: Any]
-        let request = AF.request("http://localhost:8090/updateUserPwd", method: .post, parameters: parameters)
-        request.responseData { response in
+        let parameters = ["id": user.uID ?? 0, "newPwd": newPassword, "oldPwd": oldPassword] as [String: Any]
+        let request2 = AF.request("http://localhost:8090/updateUserPwd", method: .post, parameters: parameters)
+        request2.responseData { response in
             guard let responseMessage = String(bytes:  response.data!, encoding: .utf8) else {
                 return
             }
             if responseMessage == "OK" {
                 activeAlert = .success
+                loginParameters.password = newPassword
                 reset()
                 showAlert = true
             }
@@ -151,7 +154,7 @@ struct UpdateUserPassword: View {
     }
     
     func reset() {
-        initialPassword = ""
+        oldPassword = ""
         newPassword = ""
         confirmPassword = ""
     }
