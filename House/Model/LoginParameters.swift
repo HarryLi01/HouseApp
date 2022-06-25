@@ -7,14 +7,14 @@
 
 import Foundation
 
-class LoginParameters: ObservableObject, Codable {
+class LoginParameters: ObservableObject {
     
     static let sharedLoginParam = LoginParameters()
     
-    @Published var username: String
-    @Published var password: String
+    @Published var username: String?
+    @Published var password: String?
     
-    init() {
+    private init() {
         
     }
     

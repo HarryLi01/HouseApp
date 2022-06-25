@@ -116,18 +116,21 @@ struct Login: View {
     }
     
     func login() {
-        let request = AF.request("http://localhost:8090/login", method: .post, parameters: loginParameters)
+        let networkParameters = NetworkParameters(username: loginParameters.username ?? "", password: loginParameters.password ?? "")
+        let request = AF.request("http://localhost:8090/login", method: .post, parameters: networkParameters)
         request.responseData { response in
             guard let responseBody = String(bytes: response.data ?? "500".data(using: .utf8)!, encoding: .utf8) else {
                 return
             }
             if responseBody == "500" {
                 activeAlert = .server
+                showAlert = true
             }
             if responseBody == "OK" {
                 toIndexPage = true
             } else if responseBody == "FAIL" {
                 activeAlert = .fail
+                showAlert = true
             }
         }
         
