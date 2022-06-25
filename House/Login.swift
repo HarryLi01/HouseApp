@@ -14,6 +14,11 @@ struct Login: View {
     @State private var responseBody = ""
     @State private var showAlert = false
     @State private var toIndexPage = false
+    var networkParameters: NetworkParameters {
+        get {
+            return NetworkParameters(username: username, password: password)
+        }
+    }
     enum ActiveAlert {
         case server, fail
     }
@@ -52,7 +57,7 @@ struct Login: View {
                     HStack {
                         Spacer()
                         Spacer()
-                        TextField("密码", text: $password)
+                        SecureField("密码", text: $password)
                             .padding()
                             .background(Color(red: 0.2, green: 0.3, blue: 0.4, opacity: 0.1))
                             .cornerRadius(10)
@@ -102,6 +107,7 @@ struct Login: View {
                         NavigationLink(destination: Register()) {
                             Text("注册")
                                 .foregroundColor(.red)
+                                .underline()
                         }
                     }
                 }
@@ -110,7 +116,7 @@ struct Login: View {
     }
     
     func login() {
-        let networkParameters = NetworkParameters(username: username, password: password)
+//        let networkParameters = NetworkParameters(username: username, password: password)
         let request = AF.request("http://localhost:8090/login", method: .post, parameters: networkParameters)
         request.responseData { response in
             guard let responseBody = String(bytes: response.data ?? "500".data(using: .utf8)!, encoding: .utf8) else {

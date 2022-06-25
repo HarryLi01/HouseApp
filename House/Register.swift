@@ -15,12 +15,15 @@ struct Register: View {
     @State private var phoneNumber = ""
     @State private var nickName = ""
     @State private var showAlert = false
-    @State private var toLoginPage = false
     var registerParameters: RegisterParameters {
         get {
             return RegisterParameters(uName: username, uPassword: password, uPhoneNumber: phoneNumber, uNickName: nickName)
         }
     }
+    enum ActiveAlert {
+        case success, fail
+    }
+    @State private var activeAlert : ActiveAlert = .fail
     
     var body: some View {
         ZStack {
@@ -97,23 +100,40 @@ struct Register: View {
                     Spacer()
                     Spacer()
                 }
-                NavigationLink(destination: Login(), isActive: $toLoginPage) {
-                    Button(action: register,
-                           label: {
-                        Text("注册")
-                            .font(.headline)
-                            .frame(width: 120, height: 1)
-                            .foregroundColor(.white)
-                            .padding()
-                    })
-                    .buttonStyle(.borderedProminent)
-                    .shadow(radius: 5)
-                    .alert(isPresented: $showAlert) {
-                        Alert(title: Text("注册失败!"), message: Text("用户已经注册或输入错误!"))
+                Button(action: register,
+                       label: {
+                    Text("注册")
+                        .font(.headline)
+                        .frame(width: 120, height: 1)
+                        .foregroundColor(.white)
+                        .padding()
+                })
+                .buttonStyle(.borderedProminent)
+                .shadow(radius: 5)
+                .alert(isPresented: $showAlert) {
+                    switch activeAlert {
+                    case .success:
+                        return Alert(
+                            title: Text("注册成功!"),
+                            message: Text("用户已经成功注册!")
+                        )
+                    case .fail:
+                        return Alert(
+                            title: Text("注册失败!"),
+                            message: Text("用户已经注册或输入错误!")
+                        )
                     }
+                    
                 }
+                
             }
         }
+    }
+    func reset() {
+        username = ""
+        password = ""
+        phoneNumber = ""
+        nickName = ""
     }
     func register() {
         let request = AF.request("http://localhost:8090/regist", method: .post, parameters: registerParameters)
@@ -124,14 +144,14 @@ struct Register: View {
                 return
             }
             if responseBody == "OK" {
-                //jump to index page
-                toLoginPage = true
+                activeAlert = .success
+                showAlert = true
+                reset()
             } else {
                 //remind user you register failed
                 showAlert = true
             }
         }
-        
     }
 }
 
