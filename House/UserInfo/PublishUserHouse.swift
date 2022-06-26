@@ -10,6 +10,7 @@ import Alamofire
 
 struct PublishUserHouse: View {
     let loginParameters: LoginParameters = .sharedLoginParam
+    @State var loginUser: LoginUser = LoginUser()
     @State private var houseDesc = ""
     @State private var houseModel = ""
     @State private var houseArea = ""
@@ -157,9 +158,17 @@ struct PublishUserHouse: View {
         housePrice = ""
     }
     func submit() {
-        let appPublishHouse: AppPublishHouse = AppPublishHouse(houseDesc: houseDesc, houseModel: houseModel, houseArea: houseArea, houseFloor: houseFloor, houseAddress: houseAddress, houseType: houseType, houseOriented: oriented, housePrice: housePrice)
-        let request = AF.request("http://localhost:8090/app/uploadHouse", method: .post, parameters: appPublishHouse)
-        request.responseData { response in
+        //get login user
+        let networkParameters = NetworkParameters(username: loginParameters.username ?? "", password: loginParameters.password ?? "")
+        let reqeuest1 = AF.request("http://localhost:8090/app/getLoginUser", method: .post, parameters: networkParameters)
+        reqeuest1.responseData { response in
+            let userJson = String(bytes: response.data!, encoding: .utf8)
+            loginUser = Bundle.main.decodeJson(userJson ?? "")
+        }
+        
+        let appPublishHouse: AppPublishHouse = AppPublishHouse(houseDesc: houseDesc, houseModel: houseModel, houseArea: houseArea, houseFloor: houseFloor, houseAddress: houseAddress, houseType: houseType, houseOriented: oriented, housePrice: housePrice, publisher: loginUser.uName ?? "")
+        let request2 = AF.request("http://localhost:8090/app/uploadHouse", method: .post, parameters: appPublishHouse)
+        request2.responseData { response in
             guard let responseMessage = String(bytes: response.data!, encoding: .utf8) else {
                 fatalError("There is an error processing app upload house.")
             }
