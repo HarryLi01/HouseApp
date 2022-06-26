@@ -127,10 +127,10 @@ struct UpdateUserPassword: View {
     func submit() {
         //get current login user
         let networkParameters = NetworkParameters(username: loginParameters.username ?? "", password: loginParameters.password ?? "")
-        let reqeuest1 = AF.request("http://localhost:8090/getLoginUser", method: .post, parameters: networkParameters)
+        let reqeuest1 = AF.request("http://localhost:8090/app/getLoginUser", method: .post, parameters: networkParameters)
         reqeuest1.responseData { response in
             let userJson = String(bytes: response.data!, encoding: .utf8)
-            user = decodeUserJson(userJson: userJson ?? "")
+            user = Bundle.main.decodeJson(userJson ?? "")
         }
         
         //update password

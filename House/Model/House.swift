@@ -7,20 +7,23 @@
 
 import Foundation
 
-struct House: Identifiable {
-    let id = UUID()
-    var hosueDesc:String
-    var houseModel: String
-    var houseArea: String
-    var houseFloor: String
-    var houseType: String
-    var housePrice: Int
-    var houseAddress: String
-    var houseImage: String
-    var communityName: String
-    var houseLinkMan: String
-    var houseOriented: String
-    var houseDetailsImg: String
-    var publisher: String
-    var publishTime: Date
+struct House: Identifiable, Codable {
+    var id = UUID()
+    var hID: Int
+    var houseArea: String?
+    var hosueDesc: String?
+    var houseFloor: String?
+    var houseImage: String?
+    var houseModel: String?
+    var housePrice: Int?
+    var houseType: String?
+    
+    var houseAddress: String?
+    
+    var communityName: String?
+    var houseLinkMan: String?
+    var houseOriented: String?
+    var houseDetailsImg: String?
+    var publisher: String?
+    var publishTime: Date?
 }

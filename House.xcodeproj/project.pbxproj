@@ -11,6 +11,8 @@
 		0A4C949928646CD3002119C6 /* Index.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C949828646CD3002119C6 /* Index.swift */; };
 		0A4C949B2864878F002119C6 /* RegisterParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C949A2864878F002119C6 /* RegisterParameters.swift */; };
 		0A4C949D28648B4D002119C6 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C949C28648B4D002119C6 /* Register.swift */; };
+		0A712CAB28684AFD0092EA82 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A712CAA28684AFD0092EA82 /* BundleExtension.swift */; };
+		0A712CAD28687B810092EA82 /* JsonHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A712CAC28687B810092EA82 /* JsonHouse.swift */; };
 		0A7A15BF28659FD800BB8A06 /* UserInfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A15BE28659FD800BB8A06 /* UserInfoSheet.swift */; };
 		0A7A15C22865A22600BB8A06 /* MyRentalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A15C12865A22600BB8A06 /* MyRentalInfo.swift */; };
 		0A7A15C42865A2C300BB8A06 /* UpdateUserPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A15C32865A2C300BB8A06 /* UpdateUserPassword.swift */; };
@@ -24,6 +26,7 @@
 		0AB4CEFD2863A009000500BB /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4CEFC2863A009000500BB /* Login.swift */; };
 		0AE4B6DD2866F8D000D0FB85 /* NetworkParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE4B6DC2866F8D000D0FB85 /* NetworkParameters.swift */; };
 		0AE4B6DF2866FB7100D0FB85 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE4B6DE2866FB7100D0FB85 /* LoginUser.swift */; };
+		0AE4B6E128678D6C00D0FB85 /* UserHouseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE4B6E028678D6C00D0FB85 /* UserHouseData.swift */; };
 		D82F454C89BFC87F8EF6D595 /* libPods-House.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54C49C4A514B1B6353E54523 /* libPods-House.a */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +35,8 @@
 		0A4C949828646CD3002119C6 /* Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Index.swift; sourceTree = "<group>"; };
 		0A4C949A2864878F002119C6 /* RegisterParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterParameters.swift; sourceTree = "<group>"; };
 		0A4C949C28648B4D002119C6 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
+		0A712CAA28684AFD0092EA82 /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
+		0A712CAC28687B810092EA82 /* JsonHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonHouse.swift; sourceTree = "<group>"; };
 		0A7A15BE28659FD800BB8A06 /* UserInfoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSheet.swift; sourceTree = "<group>"; };
 		0A7A15C12865A22600BB8A06 /* MyRentalInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRentalInfo.swift; sourceTree = "<group>"; };
 		0A7A15C32865A2C300BB8A06 /* UpdateUserPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserPassword.swift; sourceTree = "<group>"; };
@@ -46,6 +51,7 @@
 		0AB4CEFC2863A009000500BB /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		0AE4B6DC2866F8D000D0FB85 /* NetworkParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkParameters.swift; sourceTree = "<group>"; };
 		0AE4B6DE2866FB7100D0FB85 /* LoginUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
+		0AE4B6E028678D6C00D0FB85 /* UserHouseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHouseData.swift; sourceTree = "<group>"; };
 		1F816E2FA958E892F6436375 /* Pods-House.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-House.debug.xcconfig"; path = "Target Support Files/Pods-House/Pods-House.debug.xcconfig"; sourceTree = "<group>"; };
 		54C49C4A514B1B6353E54523 /* libPods-House.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-House.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE45ADC924E8D879CF128037 /* Pods-House.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-House.release.xcconfig"; path = "Target Support Files/Pods-House/Pods-House.release.xcconfig"; sourceTree = "<group>"; };
@@ -71,8 +77,18 @@
 				0A7A15C92865B39400BB8A06 /* House.swift */,
 				0AE4B6DC2866F8D000D0FB85 /* NetworkParameters.swift */,
 				0AE4B6DE2866FB7100D0FB85 /* LoginUser.swift */,
+				0AE4B6E028678D6C00D0FB85 /* UserHouseData.swift */,
+				0A712CAC28687B810092EA82 /* JsonHouse.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		0A712CA928684AEA0092EA82 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0A712CAA28684AFD0092EA82 /* BundleExtension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		0A7A15C02865A21000BB8A06 /* UserInfo */ = {
@@ -108,6 +124,7 @@
 		0AB4CEED28639FF9000500BB /* House */ = {
 			isa = PBXGroup;
 			children = (
+				0A712CA928684AEA0092EA82 /* Extension */,
 				0A4C9497286456CF002119C6 /* Model */,
 				0A7A15C02865A21000BB8A06 /* UserInfo */,
 				0AB4CEEE28639FF9000500BB /* HouseApp.swift */,
@@ -243,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A7A15C42865A2C300BB8A06 /* UpdateUserPassword.swift in Sources */,
+				0A712CAB28684AFD0092EA82 /* BundleExtension.swift in Sources */,
 				0A4C949B2864878F002119C6 /* RegisterParameters.swift in Sources */,
 				0A7A15CA2865B39400BB8A06 /* House.swift in Sources */,
 				0AB4CEFD2863A009000500BB /* Login.swift in Sources */,
@@ -253,7 +271,9 @@
 				0A7A15C62865AA9D00BB8A06 /* PublishUserHouse.swift in Sources */,
 				0A7A15C82865AAC200BB8A06 /* MyPublished.swift in Sources */,
 				0A7A15C22865A22600BB8A06 /* MyRentalInfo.swift in Sources */,
+				0AE4B6E128678D6C00D0FB85 /* UserHouseData.swift in Sources */,
 				0AB4CEF128639FF9000500BB /* ContentView.swift in Sources */,
+				0A712CAD28687B810092EA82 /* JsonHouse.swift in Sources */,
 				0A4C949D28648B4D002119C6 /* Register.swift in Sources */,
 				0AB4CEEF28639FF9000500BB /* HouseApp.swift in Sources */,
 				0A4C949928646CD3002119C6 /* Index.swift in Sources */,
