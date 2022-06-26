@@ -13,6 +13,7 @@
 		0A4C949D28648B4D002119C6 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4C949C28648B4D002119C6 /* Register.swift */; };
 		0A712CAB28684AFD0092EA82 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A712CAA28684AFD0092EA82 /* BundleExtension.swift */; };
 		0A712CAD28687B810092EA82 /* JsonHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A712CAC28687B810092EA82 /* JsonHouse.swift */; };
+		0A712CB12868E1A90092EA82 /* AppPublishHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A712CB02868E1A90092EA82 /* AppPublishHouse.swift */; };
 		0A7A15BF28659FD800BB8A06 /* UserInfoSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A15BE28659FD800BB8A06 /* UserInfoSheet.swift */; };
 		0A7A15C22865A22600BB8A06 /* MyRentalInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A15C12865A22600BB8A06 /* MyRentalInfo.swift */; };
 		0A7A15C42865A2C300BB8A06 /* UpdateUserPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7A15C32865A2C300BB8A06 /* UpdateUserPassword.swift */; };
@@ -37,6 +38,7 @@
 		0A4C949C28648B4D002119C6 /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		0A712CAA28684AFD0092EA82 /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
 		0A712CAC28687B810092EA82 /* JsonHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonHouse.swift; sourceTree = "<group>"; };
+		0A712CB02868E1A90092EA82 /* AppPublishHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPublishHouse.swift; sourceTree = "<group>"; };
 		0A7A15BE28659FD800BB8A06 /* UserInfoSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSheet.swift; sourceTree = "<group>"; };
 		0A7A15C12865A22600BB8A06 /* MyRentalInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRentalInfo.swift; sourceTree = "<group>"; };
 		0A7A15C32865A2C300BB8A06 /* UpdateUserPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserPassword.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				0AE4B6DE2866FB7100D0FB85 /* LoginUser.swift */,
 				0AE4B6E028678D6C00D0FB85 /* UserHouseData.swift */,
 				0A712CAC28687B810092EA82 /* JsonHouse.swift */,
+				0A712CB02868E1A90092EA82 /* AppPublishHouse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				0A7A15C42865A2C300BB8A06 /* UpdateUserPassword.swift in Sources */,
 				0A712CAB28684AFD0092EA82 /* BundleExtension.swift in Sources */,
 				0A4C949B2864878F002119C6 /* RegisterParameters.swift in Sources */,
+				0A712CB12868E1A90092EA82 /* AppPublishHouse.swift in Sources */,
 				0A7A15CA2865B39400BB8A06 /* House.swift in Sources */,
 				0AB4CEFD2863A009000500BB /* Login.swift in Sources */,
 				0AE4B6DD2866F8D000D0FB85 /* NetworkParameters.swift in Sources */,

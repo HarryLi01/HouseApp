@@ -14,10 +14,8 @@ struct Index: View {
     var body: some View {
         ScrollView {
             NavigationView {
-                VStack {
-                    ForEach (indexHouseData, id: \.self) { houseData in
-                        Text(houseData.hosueDesc ?? "无数据")
-                    }
+                List.init(indexHouseData, id: \.self) { (house: JsonHouse) in
+                    Text(house.hosueDesc ?? "")
                 }
             }
             .navigationTitle(Text("房屋租赁网"))
@@ -28,7 +26,9 @@ struct Index: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: showUserInfo) {
+                    Button(action: {
+                        showInfo = true
+                    }) {
                         Image(systemName: "person")
                     }
                     .sheet(isPresented: $showInfo) {
@@ -37,13 +37,9 @@ struct Index: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            Text("Index Page")
         }
     }
     
-    func showUserInfo() {
-        showInfo = true
-    }
     func getIndexHouseData() {
         let request = AF.request("http://localhost:8090/app/getIndexPageInfo", method: .post)
         request.responseData { response in
@@ -51,7 +47,9 @@ struct Index: View {
                 //throw fatal error if program have trouble during getting data
                 fatalError("There is an error processing index page house data")
             }
+            print(responseJson)
             indexHouseData = Bundle.main.decodeJson(responseJson)
+            print(indexHouseData[0].hID)
         }
     }
 }
