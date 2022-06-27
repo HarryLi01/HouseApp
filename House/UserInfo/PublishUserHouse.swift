@@ -18,6 +18,7 @@ struct PublishUserHouse: View {
     @State private var houseType = ""
     @State private var housePrice = ""
     @State private var houseAddress = ""
+    @State private var communityName = ""
     let houseOriented = ["东西", "南北"]
     let houseTypeArray = ["整租", "合租"]
     @State private var selectedHouseType = "整租"
@@ -79,6 +80,16 @@ struct PublishUserHouse: View {
                             Spacer()
                         }
                         Divider()
+                        HStack {
+                            Spacer()
+                            Text("小区名字")
+                                .frame(width: 90, alignment: .leading)
+                            TextField("小区名字", text: $communityName)
+                            Spacer()
+                        }
+                        Divider()
+                    }
+                    Group {
                         HStack {
                             Spacer()
                             Text("出租方式")
@@ -150,6 +161,8 @@ struct PublishUserHouse: View {
                 }
                 Spacer()
             }
+            .disableAutocorrection(true)
+            .autocapitalization(.none)
         }
     }
     func reset() {
@@ -168,7 +181,7 @@ struct PublishUserHouse: View {
             loginUser = Bundle.main.decodeJson(userJson ?? "")
         }
         
-        let appPublishHouse: AppPublishHouse = AppPublishHouse(houseDesc: houseDesc, houseModel: houseModel, houseArea: houseArea, houseFloor: houseFloor, houseAddress: houseAddress, houseType: houseType, houseOriented: oriented, housePrice: housePrice, publisher: loginUser.uName ?? "")
+        let appPublishHouse: AppPublishHouse = AppPublishHouse(houseDesc: houseDesc, houseModel: houseModel, houseArea: houseArea, houseFloor: houseFloor, houseAddress: houseAddress, houseType: selectedHouseType, houseOriented: oriented, housePrice: housePrice, publisher: loginUser.uName ?? "", communityName: communityName, houseLinkMan: loginUser.uPhoneNumber ?? "")
         let request2 = AF.request("http://localhost:8090/app/uploadHouse", method: .post, parameters: appPublishHouse)
         request2.responseData { response in
             guard let responseMessage = String(bytes: response.data!, encoding: .utf8) else {

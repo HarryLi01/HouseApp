@@ -17,4 +17,6 @@ struct AppPublishHouse: Codable {
     var houseOriented: String
     var housePrice: String
     var publisher: String
+    var communityName: String
+    var houseLinkMan: String
 }
