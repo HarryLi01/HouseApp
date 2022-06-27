@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UserInfoSheet: View {
     @State private var toRentalInfo = false
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         NavigationView {
             List {
@@ -47,6 +48,11 @@ struct UserInfoSheet: View {
                 }
             }
             .navigationTitle("个人信息")
+            .toolbar(content: {
+                Button(action: {presentationMode.wrappedValue.dismiss()}) {
+                    Text("完成")
+                }
+            })
         }
         
     }
