@@ -28,126 +28,128 @@ struct PublishUserHouse: View {
     }
     @State private var activeAlert: ActiveAlert = .fail
     var body: some View {
-        VStack(alignment: .leading) {
-            Section(header: Text("发布房源信息")
-                .font(.largeTitle)
-                .fontWeight(.heavy)
-            ) {
-                Group {
-                    Divider()
-                    HStack {
-                        Spacer()
-                        Text("房源标题")
-                            .frame(width: 90, alignment: .leading)
-                        TextField("房源标题", text: $houseDesc)
-                        Spacer()
+        ScrollView {
+            VStack(alignment: .leading) {
+                Section(header: Text("发布房源信息")
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                ) {
+                    Group {
+                        Divider()
+                        HStack {
+                            Spacer()
+                            Text("房源标题")
+                                .frame(width: 90, alignment: .leading)
+                            TextField("房源标题", text: $houseDesc)
+                            Spacer()
+                        }
+                        Divider()
+                        HStack {
+                            Spacer()
+                            Text("房屋类型")
+                                .frame(width: 90, alignment: .leading)
+                            TextField("几室几厅", text: $houseModel)
+                            Spacer()
+                        }
+                        Divider()
+                        HStack {
+                            Spacer()
+                            Text("房屋面积")
+                                .frame(width: 90, alignment: .leading)
+                            TextField("房屋面积", text: $houseArea)
+                            Spacer()
+                        }
+                        Divider()
                     }
-                    Divider()
-                    HStack {
-                        Spacer()
-                        Text("房屋类型")
-                            .frame(width: 90, alignment: .leading)
-                        TextField("几室几厅", text: $houseModel)
-                        Spacer()
-                    }
-                    Divider()
-                    HStack {
-                        Spacer()
-                        Text("房屋面积")
-                            .frame(width: 90, alignment: .leading)
-                        TextField("房屋面积", text: $houseArea)
-                        Spacer()
-                    }
-                    Divider()
-                }
 
-                Group {
-                    HStack {
-                        Spacer()
-                        Text("房屋楼层")
-                            .frame(width: 90, alignment: .leading)
-                        TextField("高层/低层/几楼", text: $houseFloor)
-                        Spacer()
-                    }
-                    Divider()
-                    HStack {
-                        Spacer()
-                        Text("房屋地址")
-                            .frame(width: 90, alignment: .leading)
-                        TextField("房屋地址", text: $houseAddress)
-                        Spacer()
-                    }
-                    Divider()
-                    HStack {
-                        Spacer()
-                        Text("出租方式")
-                            .frame(width: 90, alignment: .leading)
-                        Picker(selection: $selectedHouseType, label: Text("出租方式")) {
-                            ForEach(houseTypeArray, id: \.self) { t in
-                                Text("\(t)")
-                            }
+                    Group {
+                        HStack {
+                            Spacer()
+                            Text("房屋楼层")
+                                .frame(width: 90, alignment: .leading)
+                            TextField("高层/低层/几楼", text: $houseFloor)
+                            Spacer()
                         }
-                        .pickerStyle(.segmented)
-                        Spacer()
-                    }
-                    Divider()
-                    HStack {
-                        Spacer()
-                        Text("房屋朝向")
-                            .frame(width: 90, alignment: .leading)
-                        Picker(selection: $oriented, label: Text("房屋朝向")) {
-                            ForEach(houseOriented, id: \.self) { o in
-                                Text("\(o)")
-                            }
+                        Divider()
+                        HStack {
+                            Spacer()
+                            Text("房屋地址")
+                                .frame(width: 90, alignment: .leading)
+                            TextField("房屋地址", text: $houseAddress)
+                            Spacer()
                         }
-                        .pickerStyle(.segmented)
-                        Spacer()
+                        Divider()
+                        HStack {
+                            Spacer()
+                            Text("出租方式")
+                                .frame(width: 90, alignment: .leading)
+                            Picker(selection: $selectedHouseType, label: Text("出租方式")) {
+                                ForEach(houseTypeArray, id: \.self) { t in
+                                    Text("\(t)")
+                                }
+                            }
+                            .pickerStyle(.segmented)
+                            Spacer()
+                        }
+                        Divider()
+                        HStack {
+                            Spacer()
+                            Text("房屋朝向")
+                                .frame(width: 90, alignment: .leading)
+                            Picker(selection: $oriented, label: Text("房屋朝向")) {
+                                ForEach(houseOriented, id: \.self) { o in
+                                    Text("\(o)")
+                                }
+                            }
+                            .pickerStyle(.segmented)
+                            Spacer()
+                        }
+                        Divider()
+                        HStack {
+                            Spacer()
+                            Text("房屋价格")
+                                .frame(width: 90, alignment: .leading)
+                            TextField("每月租金", text: $housePrice)
+                            Spacer()
+                        }
+                        Divider()
                     }
-                    Divider()
-                    HStack {
-                        Spacer()
-                        Text("房屋价格")
-                            .frame(width: 90, alignment: .leading)
-                        TextField("每月租金", text: $housePrice)
-                        Spacer()
-                    }
-                    Divider()
                 }
-            }
-            HStack {
-                Spacer(minLength: 70)
-                //submit button
-                Button(action: {submit()}) {
-                    Text("提交")
-                        .frame(width: 80)
-                }
-                .shadow(radius: 1)
-                .buttonStyle(.borderedProminent)
-                .alert(isPresented: $showAlert) {
-                    switch activeAlert {
-                    case .success:
-                        return Alert(title: Text("发布成功"),
-                              message: Text("您的房源信息已经发布成功!"),
-                              primaryButton: .default(Text("取消")),
-                              secondaryButton: .default(Text("确认")))
-                    case .fail:
-                        return Alert(title: Text("发布失败"),
-                              message: Text("您的房源信息发布失败!"))
+                HStack {
+                    Spacer(minLength: 70)
+                    //submit button
+                    Button(action: {submit()}) {
+                        Text("提交")
+                            .frame(width: 80)
                     }
+                    .shadow(radius: 1)
+                    .buttonStyle(.borderedProminent)
+                    .alert(isPresented: $showAlert) {
+                        switch activeAlert {
+                        case .success:
+                            return Alert(title: Text("发布成功"),
+                                  message: Text("您的房源信息已经发布成功!"),
+                                  primaryButton: .default(Text("取消")),
+                                  secondaryButton: .default(Text("确认")))
+                        case .fail:
+                            return Alert(title: Text("发布失败"),
+                                  message: Text("您的房源信息发布失败!"))
+                        }
+                    }
+                    Spacer()
+                    
+                    //reset button
+                    Button(action: reset) {
+                        Text("重置")
+                            .frame(width: 80)
+                    }
+                    .foregroundColor(.red)
+                    .shadow(radius: 1)
+                    .buttonStyle(.bordered)
+                    Spacer(minLength: 70)
                 }
                 Spacer()
-                
-                //reset button
-                Button(action: reset) {
-                    Text("重置")
-                        .frame(width: 80)
-                }
-                .foregroundColor(.red)
-                .shadow(radius: 1)
-                .buttonStyle(.bordered)
-                Spacer(minLength: 70)
             }
-            Spacer()
         }
     }
     func reset() {
